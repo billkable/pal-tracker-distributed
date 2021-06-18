@@ -1,6 +1,7 @@
 package test.pivotal.pal.tracker.projects;
 
 import io.pivotal.pal.tracker.projects.ProjectController;
+import io.pivotal.pal.tracker.projects.ProjectEventPublisher;
 import io.pivotal.pal.tracker.projects.ProjectInfo;
 import io.pivotal.pal.tracker.projects.data.ProjectDataGateway;
 import io.pivotal.pal.tracker.projects.data.ProjectRecord;
@@ -21,7 +22,8 @@ import static test.pivotal.pal.tracker.projects.TestBuilders.*;
 public class ProjectControllerTest {
 
     private ProjectDataGateway gateway = mock(ProjectDataGateway.class);
-    private ProjectController controller = new ProjectController(gateway);
+    private ProjectEventPublisher publisher = mock(ProjectEventPublisher.class);
+    private ProjectController controller = new ProjectController(gateway, publisher);
 
     @Test
     public void testCreate() {
@@ -31,8 +33,8 @@ public class ProjectControllerTest {
 
         ResponseEntity<ProjectInfo> result = controller.create(testProjectFormBuilder().build());
 
-
         verify(gateway).create(testProjectFieldsBuilder().build());
+        verify(publisher).sendActivateEvent(record.id);
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(result.getBody()).isEqualTo(testProjectInfoBuilder().build());
     }

@@ -1,0 +1,6 @@
+apply from: "$projectDir/../server.gradle"
+
+dependencies {
+    implementation project(":components:project-event-listener")
+    implementation project(":components:backlog")
+}

@@ -4,4 +4,5 @@ dependencies {
     implementation project(":components:accounts")
     implementation project(":components:projects")
     implementation project(":components:users")
+    implementation project(":components:project-event-publisher")
 }

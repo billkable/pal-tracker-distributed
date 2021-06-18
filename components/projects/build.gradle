@@ -1,5 +1,6 @@
 dependencies {
     implementation project(":components:rest-support")
+    implementation project(":components:project-event-publisher")
     implementation "org.springframework:spring-jdbc:$springVersion"
 
     testImplementation project(":components:test-support")

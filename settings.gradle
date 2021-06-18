@@ -2,6 +2,7 @@ rootProject.name = "pal-tracker-distributed"
 
 include "applications:allocations-server"
 include "applications:backlog-server"
+include "applications:backlog-project-event-listener"
 include "applications:registration-server"
 include "applications:timesheets-server"
 
@@ -9,6 +10,8 @@ include "components:accounts"
 include "components:allocations"
 include "components:backlog"
 include "components:projects"
+include "components:project-event-listener"
+include "components:project-event-publisher"
 include "components:timesheets"
 include "components:users"
 

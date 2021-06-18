@@ -18,14 +18,18 @@ import static java.util.stream.Collectors.toList;
 public class ProjectController {
 
     private final ProjectDataGateway gateway;
+    private final ProjectEventPublisher publisher;
 
-    public ProjectController(ProjectDataGateway gateway) {
+    public ProjectController(ProjectDataGateway gateway,
+                             ProjectEventPublisher publisher) {
         this.gateway = gateway;
+        this.publisher = publisher;
     }
 
     @PostMapping
     public ResponseEntity<ProjectInfo> create(@RequestBody ProjectForm form) {
         ProjectRecord record = gateway.create(formToFields(form));
+        publisher.sendActivateEvent(record.id);
         return new ResponseEntity<>(present(record), HttpStatus.CREATED);
     }
 
