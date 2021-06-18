@@ -1,6 +1,6 @@
 dependencies {
     implementation project(":components:rest-support")
     implementation "org.springframework:spring-jdbc:$springVersion"
-
+    implementation "io.github.resilience4j:resilience4j-spring-boot2:$resilience4jVersion"
     testImplementation project(":components:test-support")
 }
